@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOIR — Digital Experience</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #08090d;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ФИОЛЕТОВОЕ СВЕЧЕНИЕ */
+    .glow {
+      position: fixed;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      background: rgba(100, 85, 255, 0.2);
+      filter: blur(95px);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      left: 50%;
+      top: 50%;
+    }
+    /* КОСМИЧЕСКИЕ ЗВЁЗДЫ */
+.stars {
+  position: fixed;
+  inset: -30px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(180, 170, 255, 0.8);
+  animation: twinkle 3s infinite alternate ease-in-out;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.15;
+    scale: 0.6;
+  }
+
+  100% {
+    opacity: 0.9;
+    scale: 1.5;
+  }
+}
+/* МЕДЛЕННОЕ ДВИЖЕНИЕ ЗВЁЗД */
+.star {
+  animation:
+    twinkle 3s infinite alternate ease-in-out,
+    starDrift 20s infinite alternate ease-in-out;
+    will-change: transform, translate;
+}
+
+@keyframes starDrift {
+  0% {
+    transform: translate3d(0px, 0px, 0);
+  }
+
+  100% {
+    transform: translate3d(12px, -18px, 0);
+  }
+}
+    /* НАВИГАЦИЯ */
+    nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 8%;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: 5px;
+    }
+
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* ГЛАВНЫЙ ЭКРАН */
+    main {
+      position: relative;
+      z-index: 1;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      perspective: 1200px;
+    }
+
+    /* ОБЩИЙ 3D-КОНТЕЙНЕР */
+    .hero-inner {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transform-style: preserve-3d;
+      transition: transform 0.12s ease-out;
+      will-change: transform;
+    }
+
+    .tag {
+      color: #a9a4ff;
+      border: 1px solid #34314f;
+      border-radius: 50px;
+      padding: 10px 16px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      animation: appear 1s both;
+    }
+
+    h1 {
+      animation: appear 1s 0.15s both;
+      margin-top: 30px;
+      font-size: clamp(56px, 8vw, 110px);
+      line-height: 1.1;
+      letter-spacing: -3px;
+      font-weight: 800;
+      -webkit-text-stroke: 0.5px rgba(180, 170, 255, 0.5);
+      text-shadow: 0 0 12px rgba(120, 100, 255, 0.2);
+    }
+
+    h1 span {
+      color: #9992ff;
+    }
+
+    p {
+      max-width: 510px;
+      margin-top: 24px;
+      color: #999ba8;
+      line-height: 1.8;
+      animation: appear 1s 0.3s both;
+    }
+
+    /* КНОПКА */
+    .cta-zone {
+      margin-top: 35px;
+      padding: 35px;
+      margin-bottom: -35px;
+    }
+
+    .cta {
+      position: relative;
+      display: inline-block;
+      padding: 16px 25px;
+      border-radius: 10px;
+      background: #fff;
+      color: #08090d;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+      will-change: transform;
+      transition:
+        transform 0.2s ease-out,
+        box-shadow 0.25s ease;
+      box-shadow: 0 0 15px rgba(130, 110, 255, 0.15);
+      animation: appear 1s 0.45s both;
+    }
+
+    .cta-zone:hover .cta {
+      box-shadow:
+        0 0 30px rgba(130, 110, 255, 0.6),
+        0 0 70px rgba(130, 110, 255, 0.3);
+    }
+
+    @keyframes appear {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 48px;
+        letter-spacing: -2px;
+      }
+
+      .hero-inner {
+        transform: none !important;
+      }
+      /* УЛУЧШЕНИЯ ДЛЯ ТЕЛЕФОНА */
+h1 {
+  font-size: clamp(36px, 10vw, 48px);
+  letter-spacing: -2px;
+}
+
+.cta {
+  color: #08090d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.glow {
+  width: 320px;
+  height: 320px;
+  background: rgba(100, 85, 255, 0.12);
+  filter: blur(85px);
+}
+.cta-zone {
+  width: 100%;
+  padding: 20px 0;
+  margin-bottom: 0;
+}
+
+.cta {
+  display: inline-block;
+  max-width: 100%;
+  padding: 15px 18px;
+  font-size: 12px;
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-inner,
+      .cta {
+        transition: none;
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="glow" id="glow"></div>
+
+  <nav>
+    <div class="logo">NOIR.</div>
+    <a href="mailto:hello@example.com">Связаться ↗</a>
+  </nav>
+
+  <main id="hero">
+    <div class="hero-inner">
+
+      <div class="tag">
+        INDEPENDENT DIGITAL STUDIO
+      </div>
+
+      <h1>
+        Beyond the<br>
+        <span>ordinary.</span>
+      </h1>
+
+      <p>
+        Создаём цифровые впечатления, которые
+        превращают обычные идеи в нечто особенное.
+      </p>
+
+      <div class="cta-zone">
+        <a class="cta" href="mailto:hello@example.com">
+          Исследовать возможности ↗
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const glow = document.getElementById("glow");
+    const heroInner = document.querySelector(".hero-inner");
+    const magneticZone = document.querySelector(".cta-zone");
+    const magneticButton = document.querySelector(".cta");
+
+    // СВЕЧЕНИЕ ЗА КУРСОРОМ
+    window.addEventListener("mousemove", function(event) {
+      glow.style.left = event.clientX + "px";
+      glow.style.top = event.clientY + "px";
+    });
+
+    // 3D-НАКЛОН ВСЕГО БЛОКА
+    if (heroInner) {
+      window.addEventListener("mousemove", function(event) {
+        if (window.innerWidth <= 600) return;
+
+        const x =
+          (event.clientX / window.innerWidth - 0.5) * 2;
+
+        const y =
+          (event.clientY / window.innerHeight - 0.5) * 2;
+
+        const rotateY = x * 12;
+        const rotateX = -y * 12;
+
+        heroInner.style.transform =
+          "rotateX(" + rotateX +
+          "deg) rotateY(" + rotateY + "deg)";
+      });
+
+      document.addEventListener("mouseleave", function() {
+        heroInner.style.transform = "";
+      });
+    }
+
+    // МАГНИТНАЯ КНОПКА
+    if (magneticZone && magneticButton) {
+      magneticZone.addEventListener("mousemove", function(event) {
+        if (window.innerWidth <= 600) return;
+
+        const rect = magneticZone.getBoundingClientRect();
+
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const x = event.clientX - centerX;
+        const y = event.clientY - centerY;
+
+        magneticButton.style.transform =
+          "translate(" + (x * 0.18) +
+          "px, " + (y * 0.18) + "px)";
+      });
+
+      magneticZone.addEventListener("mouseleave", function() {
+        magneticButton.style.transform = "translate(0px, 0px)";
+      });
+    }
+    // СОЗДАЁМ КОСМИЧЕСКИЕ ЗВЁЗДЫ
+const starsContainer = document.getElementById("stars");
+
+if (starsContainer) {
+  const starCount = window.innerWidth <= 600 ? 45 : 100;
+
+for (let i = 0; i < starCount; i++) {
+    const star = document.createElement("div");
+
+    star.classList.add("star");
+
+    // Случайное положение на экране
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    // Разный размер звёзд
+    const size = Math.random() * 2 + 1;
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    // ГЛУБИНА КАЖДОЙ ЗВЕЗДЫ
+const depth = Math.random();
+
+// Сохраняем глубину для будущего параллакса
+star.dataset.depth = depth;
+
+// Далёкие звёзды меньше, ближние крупнее
+const starSize = 1 + depth * 2;
+
+star.style.width = starSize + "px";
+star.style.height = starSize + "px";
+
+    // Разная скорость мерцания
+    star.style.animationDuration =
+      Math.random() * 3 + 2 + "s";
+
+    // Звёзды мерцают не одновременно
+    star.style.animationDelay =
+      -Math.random() * 5 + "s";
+
+    starsContainer.appendChild(star);
+  }
+}
+// НАСТОЯЩИЙ 3D-ПАРАЛЛАКС ЗВЁЗД
+const starsLayer = document.getElementById("stars");
+
+if (starsLayer) {
+  const allStars = starsLayer.querySelectorAll(".star");
+
+  window.addEventListener("mousemove", function(event) {
+    if (window.innerWidth <= 600) return;
+
+    const x = event.clientX / window.innerWidth - 0.5;
+    const y = event.clientY / window.innerHeight - 0.5;
+
+    allStars.forEach(function(star) {
+      const depth = Number(star.dataset.depth || 0);
+
+      const moveX = -x * (10 + depth * 50);
+      const moveY = -y * (10 + depth * 50);
+
+      star.style.translate =
+        moveX + "px " + moveY + "px";
+    });
+  });
+
+  document.addEventListener("mouseleave", function() {
+    allStars.forEach(function(star) {
+      star.style.translate = "0px 0px";
+    });
+  });
+}
+  </script>
+
+</body>
+</html>
